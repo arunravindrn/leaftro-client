@@ -18,8 +18,22 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      navDrawerOpen: false
+      navDrawerOpen: false,
+      isAuthenticated: false,
+      userId: null,
+      userData: {}
     };
+  }
+
+  componentWillMount() {
+    if (!this.state.isAuthenticated) {
+      console.log("Oh Yeah")
+      this.redirect();
+    }
+  }
+
+  redirect() {
+    this.props.history.push('/login');
   }
 
   componentWillReceiveProps(nextProps) {
@@ -75,11 +89,11 @@ App.propTypes = {
 };
 
 const mapStateToProps = state => {
-
+  state
 };
 
 const mapDispatchToProps = dispatch => ({
-
+  // redirect:
 });
 
 export default connect(
