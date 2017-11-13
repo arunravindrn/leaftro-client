@@ -1,13 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Header from 'components/common/Header';
-import LeftDrawer from 'components/common/LeftDrawer';
 import withWidth, {LARGE, SMALL} from 'material-ui/utils/withWidth';
 import ThemeDefault from 'theme-default';
-import Data from './routes';
+import { Switch, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import NavBarRouteData from './routes';
+import Header from 'components/common/Header';
+import LeftDrawer from 'components/common/LeftDrawer';
 
 import Accounts from 'containers/Accounts';
+import Login from 'containers/Login';
 
 class App extends React.Component {
 
@@ -41,7 +45,7 @@ class App extends React.Component {
       container: {
         margin: '80px 20px 20px 15px',
         paddingLeft: navDrawerOpen && this.props.width !== SMALL ? paddingLeftDrawerOpen : 0
-      }
+      },
     };
 
     return (
@@ -51,11 +55,13 @@ class App extends React.Component {
                   handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer.bind(this)}/>
 
             <LeftDrawer navDrawerOpen={navDrawerOpen}
-                        menus={Data.menus}
+                        menus={NavBarRouteData.menus}
                         username="User Admin"/>
 
             <div style={styles.container}>
-              <Accounts/>
+              <Switch>
+                <Route path="/accounts" component={Accounts} />
+              </Switch>
             </div>
         </div>
       </MuiThemeProvider>
@@ -68,4 +74,15 @@ App.propTypes = {
   width: PropTypes.number
 };
 
-export default withWidth()(App);
+const mapStateToProps = state => {
+
+};
+
+const mapDispatchToProps = dispatch => ({
+
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

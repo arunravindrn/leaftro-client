@@ -16,7 +16,8 @@ const config = {
 	},
 
 	devServer: {
-		contentBase: APP_DIR + '/app'
+		contentBase: APP_DIR + '/app',
+		historyApiFallback: true
 	},
 
 	resolve: {

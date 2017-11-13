@@ -40,6 +40,7 @@
     "bootstrap": "^3.3.7",
     "font-awesome": "^4.7.0",
     "history": "^4.7.2",
+    "immutable": "^3.8.2",
     "material-ui": "^0.19.4",
     "mui-theme": "^0.1.4",
     "mui-theme-default": "^0.1.7",
@@ -48,6 +49,8 @@
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
-    "redux": "^3.7.2"
+    "react-router-redux": "^4.0.8",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0"
   }
 }
