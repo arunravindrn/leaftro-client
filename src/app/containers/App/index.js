@@ -28,7 +28,8 @@ class App extends React.Component {
   componentWillMount() {
     if (!this.state.isAuthenticated) {
       console.log("Oh Yeah")
-      this.redirect();
+      // this.redirect();
+      console.log("this.this.state.", this.state);
     }
   }
 
@@ -89,7 +90,8 @@ App.propTypes = {
 };
 
 const mapStateToProps = state => {
-  state
+  console.log("state", state);
+  return state.auth;
 };
 
 const mapDispatchToProps = dispatch => ({
