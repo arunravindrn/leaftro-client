@@ -3,6 +3,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import createHistory from 'history/createBrowserHistory';
 
 import '!!style-loader!css-loader!font-awesome/css/font-awesome.css';
 import '!!style-loader!css-loader!bootstrap/dist/css/bootstrap.min.css';
@@ -13,7 +14,10 @@ import Login from 'containers/Login';
 import Accounts from 'containers/Accounts';
 import configureStore from './configureStore';
 
-const store = configureStore();
+const initialState = {};
+const history = createHistory();
+const store = configureStore(initialState, history);
+const MOUNT_NODE = document.getElementById('app');
 
 render(
   <Provider store={store}>
@@ -24,5 +28,5 @@ render(
       </Switch>
     </BrowserRouter>
   </Provider>,
-  document.getElementById('app')
+  MOUNT_NODE
 );

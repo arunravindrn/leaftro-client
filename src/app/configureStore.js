@@ -1,11 +1,39 @@
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
+import { createStore, applyMiddleware, compose } from 'redux';
+import { routerMiddleware } from 'react-router-redux';
+import createSagaMiddleware from 'redux-saga';
+import { fromJS } from 'immutable';
 
-import rootReducer from 'containers/App/reducers';
+import createReducer from './reducers';
 
-export default function configureStore() {
-  return createStore(
-    rootReducer,
-    applyMiddleware(thunk)
+
+const sagaMiddleware = createSagaMiddleware();
+
+export default function configureStore(initialState = {}, history) {
+
+  const middlewares = [
+    sagaMiddleware,
+    routerMiddleware(history)
+  ];
+
+  const enhancers = [
+    applyMiddleware(...middlewares),
+  ];
+
+  const store = createStore(
+    createReducer(),
+    fromJS(initialState),
+    compose(...enhancers)
   );
+
+  store.runSaga = sagaMiddleware.run;
+  store.injectedReducers = {};
+  store.injectedSaga = {};
+
+  if (module.hot) {
+    module.hot.accept('./reducers', () => {
+      store.replaceReducer(createReducer(store.injectedReducers));
+    });
+  }
+
+  return store;
 }
