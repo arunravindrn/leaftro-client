@@ -17,10 +17,10 @@ export function injectReducerFactory(store, isValid) {
     );
 
     // Check `store.injectReducers[key] === reducer` for hot reloading when a key is the same but reducer is different.
-    if (Reflect.has(store.injectReducers, key) && store.injectReducers[key] === reducer) return;
+    if (Reflect.has(store.injectedReducers, key) && store.injectedReducers[key] === reducer) return;
 
-    store.injectReducers[key] = reducer;
-    store.replaceReducer(createReducer(store.injectReducers));
+    store.injectedReducers[key] = reducer;
+    store.replaceReducer(createReducer(store.injectedReducers));
   };
 }
 

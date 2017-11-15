@@ -25,7 +25,7 @@ function routeReducer(state = routeInitialState, action) {
 export default function createReducer(injectedReducers) {
   return combineReducers({
     route: routeReducer,
-    auth: appReducer,
+    app: appReducer,
     ...injectedReducers
   })
 }

@@ -30,9 +30,6 @@ const config = {
 				test: /\.js?/,
 				include: [APP_DIR, 'node_modules'],
 				loader: 'babel-loader',
-				query: {
-					presets: ['react', 'env', 'stage-3']
-				}
 			}, {
 				test: /\.css?/,
 				include: ['node_modules'],

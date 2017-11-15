@@ -5,13 +5,20 @@ import withWidth, {LARGE, SMALL} from 'material-ui/utils/withWidth';
 import ThemeDefault from 'theme-default';
 import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { compose } from 'redux';
 
 import NavBarRouteData from './routes';
 import Header from 'components/common/Header';
 import LeftDrawer from 'components/common/LeftDrawer';
+import injectReducer from 'utils/injectReducer';
+import injectSaga from 'utils/injectSaga';
 
 import Accounts from 'containers/Accounts';
-import Login from 'containers/Login';
+import { makeSelectAuthenticated } from './selectors';
+import saga from './sagas';
+import reducer from './reducers';
+
 
 class App extends React.Component {
 
@@ -25,7 +32,7 @@ class App extends React.Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if (!this.state.isAuthenticated) {
       console.log("Oh Yeah")
       // this.redirect();
@@ -85,20 +92,25 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  children: PropTypes.element,
-  width: PropTypes.number
+
 };
 
-const mapStateToProps = state => {
-  console.log("state", state);
-  return state.auth;
-};
-
-const mapDispatchToProps = dispatch => ({
-  // redirect:
+const mapStateToProps = createStructuredSelector({
+  isAuthenticated: makeSelectAuthenticated()
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+const mapDispatchToProps = dispatch => {
+  return {};
+};
+
+
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
+
+const withReducer = injectReducer({ key: 'app', reducer });
+const withSaga = injectSaga({ key: 'app', saga });
+
+export default compose(
+  withReducer,
+  withSaga,
+  withConnect,
 )(App);
