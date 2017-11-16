@@ -1,11 +1,9 @@
 import { CHECK_IS_AUTHENTICATED, REDIRECT_LOGIN } from './constants';
 
 
-export function checkIsAuthenticated(payload) {
+export function checkIsAuthenticated() {
   return {
-    type: CHECK_IS_AUTHENTICATED,
-    isChecking: true,
-    payload
+    type: CHECK_IS_AUTHENTICATED
   };
 }
 

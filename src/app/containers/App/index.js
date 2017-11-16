@@ -27,17 +27,19 @@ class App extends React.Component {
     super(props);
     this.state = {
       navDrawerOpen: false,
-      // isAuthenticated: false,
+      isAuthenticated: false,
       userId: null,
       userData: {}
     };
   }
 
   componentWillMount() {
-    if (this.props.isAuthenticated) {
-      console.log("this.props", this.props.history)
+    if (this.state.isAuthenticated) {
       this.props.history.push('/login');
     }
+  }
+
+  componentDidMount() {
   }
 
   componentWillReceiveProps(nextProps) {
@@ -53,6 +55,7 @@ class App extends React.Component {
   }
 
   render() {
+
 
     let { navDrawerOpen } = this.state;
     const paddingLeftDrawerOpen = 236;
@@ -89,16 +92,13 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  isAuthenticated: PropTypes.bool
 };
 
 const mapStateToProps = createStructuredSelector({
-  isAuthenticated: makeSelectAuthenticated()
 });
 
 const mapDispatchToProps = dispatch => {
   return {
-    isAuthenticated: dispatch(checkIsAuthenticated())
   };
 };
 

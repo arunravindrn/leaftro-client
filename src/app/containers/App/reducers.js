@@ -12,8 +12,10 @@ const initialState = fromJS({
 export default function appReducer(state = initialState, action) {
   switch (action.type) {
     case CHECK_IS_AUTHENTICATED:
-      console.log("CHECK_IS_AUTHENTICATED", action);
-      return state;
+      console.log("CHECK_IS_AUTHENTICATED", action, state);
+      const s = state.set('isAuthenticated', true)
+      console.log("state s", s);
+      return s;
 
     case REDIRECT_LOGIN:
       console.log("REDIRECT_LOGIN", action);
