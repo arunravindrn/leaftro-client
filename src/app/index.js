@@ -16,7 +16,7 @@ import Accounts from 'containers/Accounts';
 import configureStore from './configureStore';
 
 const initialState = {};
-const history = createHistory();
+export const history = createHistory();
 const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
 
@@ -25,7 +25,7 @@ render(
     <BrowserRouter>
       <Switch>
         <Route exact path="/login" component={Login} />
-        <App/>
+        <Route path="/" component={App} />
       </Switch>
     </BrowserRouter>
   </Provider>,

@@ -1,4 +1,4 @@
-import { CHECK_IS_AUTHENTICATED, REDIRECT_LOGIN } from './actions';
+import { CHECK_IS_AUTHENTICATED, REDIRECT_LOGIN } from './constants';
 
 
 export function checkIsAuthenticated(payload) {
@@ -12,7 +12,7 @@ export function checkIsAuthenticated(payload) {
 export function redirectLogin(payload) {
   return {
     type: REDIRECT_LOGIN,
-    isAuthenticated: false,
+    isAuthenticated: true,
     isChecking: false,
     payload
   };

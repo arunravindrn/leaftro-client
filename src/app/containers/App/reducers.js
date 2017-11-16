@@ -13,11 +13,11 @@ export default function appReducer(state = initialState, action) {
   switch (action.type) {
     case CHECK_IS_AUTHENTICATED:
       console.log("CHECK_IS_AUTHENTICATED", action);
-      return
+      return state;
 
     case REDIRECT_LOGIN:
       console.log("REDIRECT_LOGIN", action);
-      return;
+      return state;
 
     default:
       return state;

@@ -18,6 +18,7 @@ import Accounts from 'containers/Accounts';
 import { makeSelectAuthenticated } from './selectors';
 import saga from './sagas';
 import reducer from './reducers';
+import { checkIsAuthenticated } from './actions';
 
 
 class App extends React.Component {
@@ -26,22 +27,17 @@ class App extends React.Component {
     super(props);
     this.state = {
       navDrawerOpen: false,
-      isAuthenticated: false,
+      // isAuthenticated: false,
       userId: null,
       userData: {}
     };
   }
 
-  componentDidMount() {
-    if (!this.state.isAuthenticated) {
-      console.log("Oh Yeah")
-      // this.redirect();
-      console.log("this.this.state.", this.state);
+  componentWillMount() {
+    if (this.props.isAuthenticated) {
+      console.log("this.props", this.props.history)
+      this.props.history.push('/login');
     }
-  }
-
-  redirect() {
-    this.props.history.push('/login');
   }
 
   componentWillReceiveProps(nextProps) {
@@ -57,6 +53,7 @@ class App extends React.Component {
   }
 
   render() {
+
     let { navDrawerOpen } = this.state;
     const paddingLeftDrawerOpen = 236;
 
@@ -92,7 +89,7 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-
+  isAuthenticated: PropTypes.bool
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -100,7 +97,9 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    isAuthenticated: dispatch(checkIsAuthenticated())
+  };
 };
 
 

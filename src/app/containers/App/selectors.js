@@ -10,7 +10,10 @@ const makeSelectUser = () => createSelector(
 
 const makeSelectAuthenticated = () => createSelector(
   selectHome,
-  substate => substate.get('isAuthenticated')
+  substate => {
+    console.log("substate", substate.get('isAuthenticated'));
+    return substate.get('isAuthenticated')
+  }
 );
 
 export {
@@ -18,3 +21,4 @@ export {
   makeSelectUser,
   makeSelectAuthenticated,
 };
+
