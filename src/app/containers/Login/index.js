@@ -10,7 +10,7 @@ import injectSaga from 'utils/injectSaga';
 import saga from './sagas';
 import reducer from './reducers';
 import { requestLogin } from './actions';
-import { makeSelectRequesting } from './selectors';
+import { makeSelectRequesting, makeSelectSuccess } from './selectors';
 
 
 class Login extends React.Component {
@@ -18,9 +18,10 @@ class Login extends React.Component {
     super();
 
     this.state = {
-      username: '',
+      email: '',
       password: '',
-      isRequesting: false
+      hideClass: 'register-form',
+      showClass: 'login-form'
     }
   }
 
@@ -33,28 +34,44 @@ class Login extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     let data = {
-      email: this.state.username,
+      email: this.state.email,
       password: this.state.password
     }
     this.props.dispatch(requestLogin(data));
+  }
+
+  componentDidUpdate() {
+    console.log("did update")
+    console.log("this.props.isSuccess", this.props.isSuccess)
+    if (this.props.isSuccess) {
+      this.props.history.push('/');
+    }
+  }
+
+  handleChangeForm(e) {
+    e.preventDefault();
+    this.setState({
+      showClass: this.state.hideClass,
+      hideClass: this.state.showClass
+    });
   }
 
   render() {
     return (
       <div className="login-page">
         <div className="form">
-          <form className="register-form" >
+          <form className={this.state.hideClass} >
             <input type="text" placeholder="name"/>
             <input type="password" placeholder="password"/>
             <input type="text" placeholder="email address"/>
             <button>create</button>
-            <p className="message">Already registered? <a href="#">Sign In</a></p>
+            <p className="message">Already registered? <a href="#" onClick={this.handleChangeForm.bind(this)} >Sign In</a></p>
           </form>
-          <form className="login-form">
-            <input type="text" name="username" placeholder="username" value={this.state.username} onChange={this.handleChangeData.bind(this)} name="username" />
+          <form className={this.state.showClass} >
+            <input type="text" name="email" placeholder="email" value={this.state.email} onChange={this.handleChangeData.bind(this)} name="email" />
             <input type="password" name="password" placeholder="password" value={this.state.password} onChange={this.handleChangeData.bind(this)} name="password" />
             <button onClick={this.handleSubmit.bind(this)} >login</button>
-            <p className="message">Not registered? <a href="#">Create an account</a></p>
+            <p className="message">Not registered? <a href="#" onClick={this.handleChangeForm.bind(this)}>Create an account</a></p>
           </form>
         </div>
       </div>
@@ -64,11 +81,11 @@ class Login extends React.Component {
 }
 
 Login.propTypes = {
-  onSubmitForm: PropTypes.func
 }
 
 const mapStateToProps = createStructuredSelector({
-  isRequesting: makeSelectRequesting()
+  isRequesting: makeSelectRequesting(),
+  isSuccess: makeSelectSuccess()
 })
 
 const mapDispatchToProps = (dispatch) => {
