@@ -29,8 +29,12 @@ export default function configureStore(initialState = {}, history) {
   store.injectedReducers = {};
   store.injectedSaga = {};
 
+
   if (module.hot) {
+    console.log("store.injectedReducers", store.injectedReducers)
     module.hot.accept('./reducers', () => {
+      debugger;
+      console.log("hot", store.injectedReducers)
       store.replaceReducer(createReducer(store.injectedReducers));
     });
   }
