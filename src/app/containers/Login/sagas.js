@@ -13,6 +13,7 @@ function* loginFlow(action) {
   try {
     const response = yield call(loginApi, action.payload)
     console.log("success", response)
+    window.localStorage.setItem('id_token', response.token);
     yield put({ type: LOGIN_SUCCESS, response })
   } catch (error) {
     console.log("error", error)

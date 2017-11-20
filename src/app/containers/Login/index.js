@@ -3,14 +3,19 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
+import MDSpinner from 'react-md-spinner';
 
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 
 import saga from './sagas';
 import reducer from './reducers';
-import { requestLogin } from './actions';
-import { makeSelectRequesting, makeSelectSuccess } from './selectors';
+import { requestLogin, checkIsAuthenticated } from './actions';
+import {
+  makeSelectRequesting,
+  makeSelectSuccess,
+  makeSelectAuthenticated
+} from './selectors';
 
 
 class Login extends React.Component {
@@ -18,6 +23,7 @@ class Login extends React.Component {
     super();
 
     this.state = {
+      full_name: '',
       email: '',
       password: '',
       hideClass: 'register-form',
@@ -56,23 +62,39 @@ class Login extends React.Component {
     });
   }
 
+  handleCreate() {
+
+  }
+
   render() {
+
+    const loadingSpinner = (text) => {
+      if (this.props.isRequesting) {
+        return <MDSpinner size={18} />;
+      } else {
+        return text;
+      }
+    }
+
     return (
       <div className="login-page">
         <div className="form">
           <form className={this.state.hideClass} >
-            <input type="text" placeholder="name"/>
-            <input type="password" placeholder="password"/>
-            <input type="text" placeholder="email address"/>
-            <button>create</button>
+            <input type="text" name="full_name" value={this.state.full_name} onChange={this.handleChangeData.bind(this)} placeholder="name"/>
+            <input type="password" name="password" value={this.state.password} onChange={this.handleChangeData.bind(this)} placeholder="password"/>
+            <input type="text" name="email" value={this.state.email} onChange={this.handleChangeData.bind(this)} placeholder="email address"/>
+            <button onClick={this.handleCreate.bind(this)} >{loadingSpinner("create")}</button>
             <p className="message">Already registered? <a href="#" onClick={this.handleChangeForm.bind(this)} >Sign In</a></p>
           </form>
           <form className={this.state.showClass} >
             <input type="text" name="email" placeholder="email" value={this.state.email} onChange={this.handleChangeData.bind(this)} name="email" />
             <input type="password" name="password" placeholder="password" value={this.state.password} onChange={this.handleChangeData.bind(this)} name="password" />
-            <button onClick={this.handleSubmit.bind(this)} >login</button>
+            <button onClick={this.handleSubmit.bind(this)} > {loadingSpinner("login")} </button>
             <p className="message">Not registered? <a href="#" onClick={this.handleChangeForm.bind(this)}>Create an account</a></p>
           </form>
+          <div className="form-group">
+
+          </div>
         </div>
       </div>
     );
@@ -84,12 +106,14 @@ Login.propTypes = {
 }
 
 const mapStateToProps = createStructuredSelector({
+  isAuthenticated: makeSelectAuthenticated(),
   isRequesting: makeSelectRequesting(),
   isSuccess: makeSelectSuccess()
 })
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    checkIsAuthenticated: () => dispatch(checkIsAuthenticated()),
     dispatch
   };
 }

@@ -16,9 +16,18 @@ const makeSelectAuthenticated = () => createSelector(
   }
 );
 
+const makeSelectRedirect = () => createSelector(
+  selectHome,
+  substate => {
+    console.log("substate.get('redirect')", substate.get('redirect'))
+    return substate.get('redirect');
+  }
+);
+
 export {
   selectHome,
   makeSelectUser,
   makeSelectAuthenticated,
+  makeSelectRedirect
 };
 
