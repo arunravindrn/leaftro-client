@@ -6,18 +6,28 @@ import {
   AUTHENTICATION_FAILURE,
   REDIRECT_LOGIN
 } from './constants';
-import { BASE_URL } from 'utils/constants';
+import { TOKEN } from 'utils/constants';
+import { validateAuthTokenApi } from 'utils/apis';
 
 
 function* authFlow(action) {
-  const id_token = window.localStorage.getItem('id_token');
 
-  if (id_token) {
+  try {
+    console.log("try clause");
+    yield validateAuthTokenApi.post({ token: TOKEN })
+      .then(response => {
+      console.log("responsibles", response)
+      return response
+    })
+      .then(res => {
+        console.log("new response", res);
+      })
     yield put({ type: AUTHENTICATED })
-  }
-  else {
+  } catch(error) {
+    console.log("error", error)
     yield put({ type: REDIRECT_LOGIN })
   }
+
 }
 
 const validateAuthToken = (token) => {

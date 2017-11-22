@@ -15,7 +15,7 @@ import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 
 import Accounts from 'containers/Accounts';
-import { makeSelectAuthenticated, makeSelectUser, makeSelectRedirect } from './selectors';
+import { makeSelectUser, makeSelectRedirect } from './selectors';
 import saga from './sagas';
 import reducer from './reducers';
 import { checkIsAuthenticated } from './actions';

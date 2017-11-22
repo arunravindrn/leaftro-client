@@ -17,7 +17,7 @@ const makeSelectSuccess = () => createSelector(
   substate => substate.get('isSuccess')
 );
 
-makeSelectAuthenticated = () => createSelector(
+const makeSelectAuthenticated = () => createSelector(
   selectLogin,
   substate => substate.get('isAuthenticated')
 );
@@ -26,5 +26,6 @@ makeSelectAuthenticated = () => createSelector(
 export {
   selectLogin,
   makeSelectRequesting,
-  makeSelectSuccess
+  makeSelectSuccess,
+  makeSelectAuthenticated
 };
