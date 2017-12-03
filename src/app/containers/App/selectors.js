@@ -11,7 +11,7 @@ const makeSelectUser = () => createSelector(
 const makeSelectAuthenticated = () => createSelector(
   selectHome,
   substate => {
-    console.log("substate", substate.get('isAuthenticated'));
+    // console.log("substate", substate.get('isAuthenticated'));
     return substate.get('isAuthenticated')
   }
 );
@@ -19,7 +19,7 @@ const makeSelectAuthenticated = () => createSelector(
 const makeSelectRedirect = () => createSelector(
   selectHome,
   substate => {
-    console.log("substate.get('redirect')", substate.get('redirect'))
+    // console.log("substate.get('redirect')", substate.get('redirect'))
     return substate.get('redirect');
   }
 );

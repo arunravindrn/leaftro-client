@@ -11,11 +11,9 @@ import { authFlow } from 'containers/App/sagas';
 
 
 function* loginFlow(action) {
-  console.log("login init");
   try {
     const response = yield loginApi.post(action.payload)
       .then(response => {
-        console.log("success", response)
         window.localStorage.setItem('id_token', response.token);
         return response;
       });
@@ -23,12 +21,11 @@ function* loginFlow(action) {
     yield put({ type: LOGIN_SUCCESS, response })
 
   } catch (error) {
-    console.log("error", error)
     yield put({ type: LOGIN_FAILURE })
   }
 }
 
+
 export default function* loginWatcher() {
-  yield takeLatest(LOGIN_REQUEST, loginFlow),
-  yield takeLatest(CHECK_IS_AUTHENTICATED, authFlow)
+  yield takeLatest(LOGIN_REQUEST, loginFlow)
 }

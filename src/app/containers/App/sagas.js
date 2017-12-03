@@ -8,6 +8,7 @@ import {
 } from './constants';
 import { TOKEN } from 'utils/constants';
 import { validateAuthTokenApi } from 'utils/apis';
+import {redirectLogin} from './actions';
 
 
 export function* authFlow(action) {
@@ -22,8 +23,9 @@ export function* authFlow(action) {
       })
     yield put({ type: AUTHENTICATED })
   } catch(error) {
-    // console.log("error", error)
-    yield put({ type: REDIRECT_LOGIN })
+    console.log("error")
+    // yield put({ type: REDIRECT_LOGIN })
+    yield put(redirectLogin())
   }
 
 }

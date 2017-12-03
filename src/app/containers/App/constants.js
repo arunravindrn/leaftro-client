@@ -1,5 +1,4 @@
 
-export const BASE_URL = ''
 export const CHECK_IS_AUTHENTICATED = 'containers/App/CHECK_IS_AUTHENTICATED';
 export const REDIRECT_LOGIN = 'containers/App/REDIRECT_LOGIN';
 export const GET_USER_DATA = 'containers/App/GET_USER_DATA';

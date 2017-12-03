@@ -10,7 +10,8 @@ import injectSaga from 'utils/injectSaga';
 
 import saga from './sagas';
 import reducer from './reducers';
-import { requestLogin, checkIsAuthenticated } from './actions';
+import { requestLogin } from './actions';
+import { checkIsAuthenticated } from 'containers/App/actions';
 import {
   makeSelectRequesting,
   makeSelectSuccess,
@@ -51,9 +52,7 @@ class Login extends React.Component {
   }
 
   componentDidUpdate() {
-    console.log("did update")
-    console.log("this.props.isSuccess", this.props.isSuccess, this.props.isAuthenticated)
-    if (this.props.isSuccess || this.props.isAuthenticated) {
+    if (this.props.isSuccess) {
       this.props.history.push('/');
     }
   }

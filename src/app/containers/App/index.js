@@ -41,11 +41,6 @@ class App extends React.Component {
     if (this.props.width !== nextProps.width) {
       this.setState({navDrawerOpen: nextProps.width === LARGE});
     }
-    console.log("will receive props");
-
-    if (nextProps.redirect) {
-      this.props.history.push('/login');
-    }
   }
 
   handleChangeRequestNavDrawer() {
@@ -95,7 +90,6 @@ App.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   userData: makeSelectUser(),
-  redirect: makeSelectRedirect()
 });
 
 const mapDispatchToProps = dispatch => {
