@@ -31,6 +31,10 @@ class Login extends React.Component {
     }
   }
 
+  componentWillMount() {
+    this.props.checkIsAuthenticated();
+  }
+
   handleChangeData(e) {
     this.setState({
       [e.target.name]: e.target.value
@@ -48,8 +52,8 @@ class Login extends React.Component {
 
   componentDidUpdate() {
     console.log("did update")
-    console.log("this.props.isSuccess", this.props.isSuccess)
-    if (this.props.isSuccess) {
+    console.log("this.props.isSuccess", this.props.isSuccess, this.props.isAuthenticated)
+    if (this.props.isSuccess || this.props.isAuthenticated) {
       this.props.history.push('/');
     }
   }

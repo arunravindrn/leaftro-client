@@ -1,7 +1,7 @@
 import { call } from 'redux-saga/effects';
 
 import { BASE_URL, TOKEN } from './constants';
-
+import request from 'utils/request';
 
 // simple api generator.
 const apiGenerator = (url, authenticate = true) => {
@@ -31,7 +31,8 @@ const apiGenerator = (url, authenticate = true) => {
       body: JSON.stringify(data)
     }
 
-    return fetch(url, options);
+    // return fetch(url, options);
+    return request(url, options);
   }
 
   return {

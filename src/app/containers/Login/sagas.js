@@ -5,13 +5,14 @@ import {
   LOGIN_REQUEST,
   LOGIN_FAILURE
 } from './constants';
+import { CHECK_IS_AUTHENTICATED } from 'containers/App/constants';
 import { loginApi } from 'utils/apis';
+import { authFlow } from 'containers/App/sagas';
 
 
 function* loginFlow(action) {
   console.log("login init");
   try {
-    // const response = yield call(loginApi, action.payload)
     const response = yield loginApi.post(action.payload)
       .then(response => {
         console.log("success", response)
@@ -28,5 +29,6 @@ function* loginFlow(action) {
 }
 
 export default function* loginWatcher() {
-  yield takeLatest(LOGIN_REQUEST, loginFlow)
+  yield takeLatest(LOGIN_REQUEST, loginFlow),
+  yield takeLatest(CHECK_IS_AUTHENTICATED, authFlow)
 }

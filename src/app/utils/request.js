@@ -31,6 +31,18 @@ function checkStatus(response) {
   throw error;
 }
 
+function checkSuccess(response) {
+  if (!response.hasOwnProperty('success') || response.success) {
+    console.log("if inside");
+    return response;
+  }
+  console.log("PushNotificationIOS.getMessage()", response)
+
+  const error = new Error(response.msg);
+  // error.response = response;
+  throw error;
+}
+
 /**
  * Requests a URL, returning a promise
  *
@@ -42,5 +54,6 @@ function checkStatus(response) {
 export default function request(url, options) {
   return fetch(url, options)
     .then(checkStatus)
-    .then(parseJSON);
+    .then(parseJSON)
+    .then(checkSuccess)
 }

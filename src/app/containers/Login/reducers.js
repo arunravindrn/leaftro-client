@@ -1,9 +1,18 @@
 import { fromJS } from 'immutable';
 
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from './constants';
+import {
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+} from './constants';
+import {
+  CHECK_IS_AUTHENTICATED,
+  AUTHENTICATED
+} from 'containers/App/constants';
 
 
 const initialState = fromJS({
+  isChecking: false,
   isRequesting: false,
   isSuccess: false,
   isError: false,
@@ -27,6 +36,15 @@ export default function loginReducer(state = initialState, action) {
       return state
         .set('isRequesting', false)
         .set('isError', true)
+
+    case CHECK_IS_AUTHENTICATED:
+      return state
+        .set('isChecking', true)
+
+    case AUTHENTICATED:
+      return state
+        .set('isChecking', false)
+        .set('isAuthenticated', true)
 
     default:
       return state;

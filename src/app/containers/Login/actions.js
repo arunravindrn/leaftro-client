@@ -1,4 +1,5 @@
-import { LOGIN_SUCCESS, LOGIN_REQUEST, LOGIN_FAILURE, CHECK_IS_AUTHENTICATED } from './constants';
+import { LOGIN_SUCCESS, LOGIN_REQUEST, LOGIN_FAILURE } from './constants';
+import { CHECK_IS_AUTHENTICATED } from 'containers/App/constants';
 
 
 export function requestLogin(payload) {
