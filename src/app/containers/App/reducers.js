@@ -15,7 +15,7 @@ export default function appReducer(state = initialState, action) {
   switch (action.type) {
 
     case CHECK_IS_AUTHENTICATED:
-      console.log("here--------")
+      console.log("checkIsAuthenticated reducer")
       return state
         .set('isChecking', true)
 

@@ -34,7 +34,6 @@ class Login extends React.Component {
   }
 
   componentWillMount() {
-    console.log("this.props.isAuthenticated", this.props.isAuthenticated)
     this.props.checkIsAuthenticated();
   }
 
@@ -54,7 +53,6 @@ class Login extends React.Component {
   }
 
   componentDidUpdate() {
-    console.log("this.props.isAuthenticated did update", this.props.isAuthenticated)
     if (this.props.isSuccess) {
       this.props.history.push('/');
     }

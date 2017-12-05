@@ -34,16 +34,13 @@ class App extends React.Component {
   }
 
   componentWillMount() {
-    console.log("this.props.isAuthenticated app willmount", this.props.isAuthenticated)
     this.props.checkIsAuthenticated();
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("this.props.isAuthenticated will receive", this.props.isAuthenticated)
     if (this.props.width !== nextProps.width) {
       this.setState({navDrawerOpen: nextProps.width === LARGE});
     }
-    console.log("this.props.isAuthenticated nextProps", nextProps.isAuthenticated)
   }
 
   handleChangeRequestNavDrawer() {
@@ -53,7 +50,6 @@ class App extends React.Component {
   }
 
   componentDidUpdate() {
-    console.log("this.props.isAuthenticated did update", this.props.isAuthenticated)
   }
 
   render() {

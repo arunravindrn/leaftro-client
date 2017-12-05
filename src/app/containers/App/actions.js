@@ -20,8 +20,6 @@ export function redirectLogin() {
 
 export function authenticated() {
 
-  console.log({history})
-
   history.push('/')
 
   return {
