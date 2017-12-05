@@ -15,7 +15,7 @@ import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 
 import Accounts from 'containers/Accounts';
-import { makeSelectUser, makeSelectRedirect } from './selectors';
+import { makeSelectUser, makeSelectIsChecking, makeSelectIsAuthenticated } from './selectors';
 import saga from './sagas';
 import reducer from './reducers';
 import { checkIsAuthenticated } from './actions';
@@ -34,19 +34,26 @@ class App extends React.Component {
   }
 
   componentWillMount() {
+    console.log("this.props.isAuthenticated app willmount", this.props.isAuthenticated)
     this.props.checkIsAuthenticated();
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log("this.props.isAuthenticated will receive", this.props.isAuthenticated)
     if (this.props.width !== nextProps.width) {
       this.setState({navDrawerOpen: nextProps.width === LARGE});
     }
+    console.log("this.props.isAuthenticated nextProps", nextProps.isAuthenticated)
   }
 
   handleChangeRequestNavDrawer() {
     this.setState({
       navDrawerOpen: !this.state.navDrawerOpen
     });
+  }
+
+  componentDidUpdate() {
+    console.log("this.props.isAuthenticated did update", this.props.isAuthenticated)
   }
 
   render() {
@@ -90,6 +97,8 @@ App.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   userData: makeSelectUser(),
+  isChecking: makeSelectIsChecking(),
+  isAuthenticated: makeSelectIsAuthenticated()
 });
 
 const mapDispatchToProps = dispatch => {

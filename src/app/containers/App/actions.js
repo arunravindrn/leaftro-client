@@ -1,8 +1,9 @@
-import { CHECK_IS_AUTHENTICATED, REDIRECT_LOGIN } from './constants';
+import { CHECK_IS_AUTHENTICATED, REDIRECT_LOGIN, AUTHENTICATED } from './constants';
 import history from 'browserHistory';
 
 
 export function checkIsAuthenticated() {
+  console.log("check")
   return {
     type: CHECK_IS_AUTHENTICATED
   };
@@ -15,4 +16,15 @@ export function redirectLogin() {
   return {
     type: REDIRECT_LOGIN,
   };
+}
+
+export function authenticated() {
+
+  console.log({history})
+
+  history.push('/')
+
+  return {
+    type: AUTHENTICATED
+  }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import {Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
@@ -51,7 +51,7 @@ class Header extends React.Component {
                           anchorOrigin={{horizontal: 'right', vertical: 'top'}}
                 >
                   <MenuItem primaryText="Sign out"
-                  // containerElement={<Link to="/login"/>}
+                  containerElement={<Link to="/login"/>}
                   />
                 </IconMenu>
               </div>

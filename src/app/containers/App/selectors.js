@@ -8,7 +8,7 @@ const makeSelectUser = () => createSelector(
   substate => substate.get('userData')
 );
 
-const makeSelectAuthenticated = () => createSelector(
+const makeSelectIsAuthenticated = () => createSelector(
   selectHome,
   substate => {
     // console.log("substate", substate.get('isAuthenticated'));
@@ -16,18 +16,18 @@ const makeSelectAuthenticated = () => createSelector(
   }
 );
 
-const makeSelectRedirect = () => createSelector(
+const makeSelectIsChecking = () => createSelector(
   selectHome,
   substate => {
     // console.log("substate.get('redirect')", substate.get('redirect'))
-    return substate.get('redirect');
+    return substate.get('isChecking');
   }
 );
 
 export {
   selectHome,
   makeSelectUser,
-  makeSelectAuthenticated,
-  makeSelectRedirect
+  makeSelectIsAuthenticated,
+  makeSelectIsChecking
 };
 

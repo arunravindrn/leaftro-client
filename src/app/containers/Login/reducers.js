@@ -9,6 +9,7 @@ import {
   CHECK_IS_AUTHENTICATED,
   AUTHENTICATED
 } from 'containers/App/constants';
+import history from 'browserHistory';
 
 
 const initialState = fromJS({
@@ -36,15 +37,6 @@ export default function loginReducer(state = initialState, action) {
       return state
         .set('isRequesting', false)
         .set('isError', true)
-
-    case CHECK_IS_AUTHENTICATED:
-      return state
-        .set('isChecking', true)
-
-    case AUTHENTICATED:
-      return state
-        .set('isChecking', false)
-        .set('isAuthenticated', true)
 
     default:
       return state;

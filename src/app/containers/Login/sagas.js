@@ -5,9 +5,7 @@ import {
   LOGIN_REQUEST,
   LOGIN_FAILURE
 } from './constants';
-import { CHECK_IS_AUTHENTICATED } from 'containers/App/constants';
 import { loginApi } from 'utils/apis';
-import { authFlow } from 'containers/App/sagas';
 
 
 function* loginFlow(action) {

@@ -28,7 +28,7 @@ const LeftDrawer = (props) => {
     avatar: {
       div: {
         padding: '15px 0 20px 15px',
-        height: 45
+        height: 100
       },
       icon: {
         float: 'left',

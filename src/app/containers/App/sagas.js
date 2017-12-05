@@ -7,21 +7,18 @@ import {
   REDIRECT_LOGIN
 } from './constants';
 import { TOKEN } from 'utils/constants';
-import { validateAuthTokenApi } from 'utils/apis';
-import {redirectLogin} from './actions';
+import { redirectLogin, authenticated } from './actions';
 
 
 export function* authFlow(action) {
 
   try {
 
-    if (!TOKEN) throw new Error('No Token');
+    console.log("try clause");
 
-    yield validateAuthTokenApi.post({ token: TOKEN })
-      .then(response => {
-        // console.log("response", response);
-      })
-    yield put({ type: AUTHENTICATED })
+    if (!TOKEN) throw new Error('No Token');
+    yield put(authenticated())
+
   } catch(error) {
     console.log("error")
     // yield put({ type: REDIRECT_LOGIN })

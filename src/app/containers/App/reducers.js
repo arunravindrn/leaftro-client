@@ -13,7 +13,9 @@ const initialState = fromJS({
 
 export default function appReducer(state = initialState, action) {
   switch (action.type) {
+
     case CHECK_IS_AUTHENTICATED:
+      console.log("here--------")
       return state
         .set('isChecking', true)
 
@@ -22,6 +24,7 @@ export default function appReducer(state = initialState, action) {
         .set('isChecking', false)
 
     case AUTHENTICATED:
+    console.log("authenticated reducer")
       return state
         .set('isAuthenticated', true)
         .set('isChecking', false)

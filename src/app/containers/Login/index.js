@@ -11,12 +11,13 @@ import injectSaga from 'utils/injectSaga';
 import saga from './sagas';
 import reducer from './reducers';
 import { requestLogin } from './actions';
-import { checkIsAuthenticated } from 'containers/App/actions';
 import {
   makeSelectRequesting,
-  makeSelectSuccess,
-  makeSelectAuthenticated
+  makeSelectSuccess
 } from './selectors';
+
+import { checkIsAuthenticated } from 'containers/App/actions';
+import { makeSelectIsAuthenticated } from 'containers/App/selectors';
 
 
 class Login extends React.Component {
@@ -33,6 +34,7 @@ class Login extends React.Component {
   }
 
   componentWillMount() {
+    console.log("this.props.isAuthenticated", this.props.isAuthenticated)
     this.props.checkIsAuthenticated();
   }
 
@@ -52,6 +54,7 @@ class Login extends React.Component {
   }
 
   componentDidUpdate() {
+    console.log("this.props.isAuthenticated did update", this.props.isAuthenticated)
     if (this.props.isSuccess) {
       this.props.history.push('/');
     }
@@ -109,9 +112,9 @@ Login.propTypes = {
 }
 
 const mapStateToProps = createStructuredSelector({
-  isAuthenticated: makeSelectAuthenticated(),
   isRequesting: makeSelectRequesting(),
-  isSuccess: makeSelectSuccess()
+  isSuccess: makeSelectSuccess(),
+  isAuthenticated: makeSelectIsAuthenticated()
 })
 
 const mapDispatchToProps = (dispatch) => {
