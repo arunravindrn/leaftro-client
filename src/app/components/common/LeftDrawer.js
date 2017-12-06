@@ -43,13 +43,18 @@ const LeftDrawer = (props) => {
         fontWeight: 300,
         textShadow: '1px 1px #444'
       }
+    },
+    root: {
+      backgroundColor: 'rgb(123, 133, 206)'
     }
   };
 
   return (
     <Drawer
       docked={true}
-      open={navDrawerOpen}>
+      open={navDrawerOpen}
+      containerStyle={styles.root}
+      >
         <div style={styles.logo}>
           Admin
         </div>
