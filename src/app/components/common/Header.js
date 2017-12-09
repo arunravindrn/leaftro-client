@@ -9,7 +9,7 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import Menu from 'material-ui/svg-icons/navigation/menu';
 import ViewModule from 'material-ui/svg-icons/action/view-module';
 import {white} from 'material-ui/styles/colors';
-import SearchBox from './SearchBox';
+
 
 class Header extends React.Component {
 
@@ -20,7 +20,8 @@ class Header extends React.Component {
       appBar: {
         position: 'fixed',
         top: 0,
-        backgroundColor: 'rgb(149, 163, 232)',
+        // backgroundColor: 'rgb(149, 163, 232)',
+        backgroundColor: 'rgb(56, 67, 121)',
         overflow: 'hidden',
         maxHeight: 57
       },

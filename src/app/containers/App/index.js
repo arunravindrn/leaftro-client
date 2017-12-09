@@ -67,23 +67,42 @@ class App extends React.Component {
       },
     };
 
+    // return (
+    //   <MuiThemeProvider muiTheme={ThemeDefault}>
+    //     <div>
+    //       <Header styles={styles.header}
+    //               handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer.bind(this)}/>
+
+    //         <LeftDrawer navDrawerOpen={navDrawerOpen}
+    //                     menus={NavBarRouteData.menus}
+    //                     username="User Admin"/>
+
+    //         <div style={styles.container}>
+    //           <Switch>
+    //             <Route path="/accounts" component={Accounts} />
+    //           </Switch>
+    //         </div>
+    //     </div>
+    //   </MuiThemeProvider>
+    // );
+
     return (
-      <MuiThemeProvider muiTheme={ThemeDefault}>
-        <div>
-          <Header styles={styles.header}
-                  handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer.bind(this)}/>
 
-            <LeftDrawer navDrawerOpen={navDrawerOpen}
-                        menus={NavBarRouteData.menus}
-                        username="User Admin"/>
+      <div>
+        <Header styles={styles.header}
+                handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer.bind(this)}/>
 
-            <div style={styles.container}>
-              <Switch>
-                <Route path="/accounts" component={Accounts} />
-              </Switch>
-            </div>
-        </div>
-      </MuiThemeProvider>
+          <LeftDrawer navDrawerOpen={navDrawerOpen}
+                      menus={NavBarRouteData.menus}
+                      username="User Admin"/>
+
+          <div style={styles.container}>
+            <Switch>
+              <Route path="/accounts" component={Accounts} />
+            </Switch>
+          </div>
+      </div>
+
     );
   }
 }

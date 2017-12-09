@@ -10,11 +10,17 @@ import { loginApi } from 'utils/apis';
 
 function* loginFlow(action) {
   try {
-    const response = yield loginApi.post(action.payload)
-      .then(response => {
-        window.localStorage.setItem('id_token', response.token);
-        return response;
-      });
+    // const response = yield loginApi.post(action.payload)
+      // .then(response => {
+      //   window.localStorage.setItem('id_token', response.token);
+      //   return response;
+      // })
+      // .catch((error) => {
+      //   console.log({error})
+      // })
+    const response = yield call(loginApi.post, action.payload)
+
+    console.log({response})
 
     yield put({ type: LOGIN_SUCCESS, response })
 

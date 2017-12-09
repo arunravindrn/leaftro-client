@@ -17,7 +17,8 @@ const LeftDrawer = (props) => {
       color: typography.textFullWhite,
       lineHeight: `${spacing.desktopKeylineIncrement}px`,
       fontWeight: typography.fontWeightLight,
-      backgroundColor: 'rgb(149, 163, 232)',
+      // backgroundColor: 'rgb(149, 163, 232)',
+      backgroundColor: 'rgb(56, 67, 121)',
       paddingLeft: 40,
       height: 56,
     },
@@ -55,9 +56,7 @@ const LeftDrawer = (props) => {
       open={navDrawerOpen}
       containerStyle={styles.root}
       >
-        <div style={styles.logo}>
-          Admin
-        </div>
+        <div style={styles.logo}>LeafTro</div>
         <div style={styles.avatar.div}>
           <Avatar src=""
                   size={50}
