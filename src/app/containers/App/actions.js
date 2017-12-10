@@ -3,7 +3,6 @@ import history from 'browserHistory';
 
 
 export function checkIsAuthenticated() {
-  console.log("check")
   return {
     type: CHECK_IS_AUTHENTICATED
   };

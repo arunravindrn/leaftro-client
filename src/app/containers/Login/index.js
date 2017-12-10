@@ -1,3 +1,8 @@
+/*****************************
+ * Author : <%= user %>
+ * Created on : <%= date %>
+ *****************************/
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -58,14 +63,6 @@ class Login extends React.Component {
     }
   }
 
-  handleChangeForm(e) {
-    e.preventDefault();
-    this.setState({
-      showClass: this.state.hideClass,
-      hideClass: this.state.showClass
-    });
-  }
-
   render() {
 
     const loadingSpinner = (text) => {
@@ -83,35 +80,17 @@ class Login extends React.Component {
             <TextField floatingLabelText="Email" name="email" value={this.state.email} onChange={this.handleChangeData.bind(this)} />
             <TextField floatingLabelText="Password" name="password" value={this.state.password} onChange={this.handleChangeData.bind(this)} />
             <FlatButton label={loadingSpinner("login")} onClick={this.handleSubmit.bind(this)} disabled={!(this.state.email && this.state.password)} style={styles.button} />
+            <p className="message">Not registered? <a href="#" >Create an account</a></p>
           </form>
         </div>
       </div>
     );
-
-    // return (
-    //   <div className="login-page">
-    //     <div className="form">
-    //       <form className={this.state.hideClass} >
-    //         <input type="text" name="full_name" value={this.state.full_name} onChange={this.handleChangeData.bind(this)} placeholder="name"/>
-    //         <input type="password" name="password" value={this.state.password} onChange={this.handleChangeData.bind(this)} placeholder="password"/>
-    //         <input type="text" name="email" value={this.state.email} onChange={this.handleChangeData.bind(this)} placeholder="email address"/>
-    //         <button onClick={this.handleCreate.bind(this)} >{loadingSpinner("create")}</button>
-    //         <p className="message">Already registered? <a href="#" onClick={this.handleChangeForm.bind(this)} >Sign In</a></p>
-    //       </form>
-    //       <form className={this.state.showClass} >
-    //         <input type="text" name="email" placeholder="email" value={this.state.email} onChange={this.handleChangeData.bind(this)} name="email" />
-    //         <input type="password" name="password" placeholder="password" value={this.state.password} onChange={this.handleChangeData.bind(this)} name="password" />
-    //         <button onClick={this.handleSubmit.bind(this)} > {loadingSpinner("login")} </button>
-    //         <p className="message">Not registered? <a href="#" onClick={this.handleChangeForm.bind(this)}>Create an account</a></p>
-    //       </form>
-    //     </div>
-    //   </div>
-    // );
   }
 
 }
 
 Login.propTypes = {
+
 }
 
 const mapStateToProps = createStructuredSelector({

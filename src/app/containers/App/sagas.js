@@ -13,16 +13,11 @@ import { redirectLogin, authenticated } from './actions';
 export function* authFlow(action) {
 
   try {
-
-    console.log("try clause");
-
     if (!TOKEN) throw new Error('No Token');
-    yield put(authenticated())
-
-  } catch(error) {
-    console.log("error")
-    // yield put({ type: REDIRECT_LOGIN })
-    yield put(redirectLogin())
+    yield put(authenticated());
+  }
+  catch(error) {
+    yield put(redirectLogin());
   }
 
 }
