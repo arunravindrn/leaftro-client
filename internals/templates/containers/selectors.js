@@ -1,6 +1,8 @@
 import { createSelector } from 'reselect';
 
 
-export {
+const select<%= name %> = state => state.get('<%= camelCaseName %>');
 
+export {
+  select<%= name %>
 }

@@ -1,9 +1,7 @@
 import { createSelector } from 'reselect';
 
 
-const selectLogin = state => {
-  return state.get('login')
-};
+const selectLogin = state => state.get('login');
 
 const makeSelectRequesting = () => createSelector(
   selectLogin,

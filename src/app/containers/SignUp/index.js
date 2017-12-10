@@ -1,6 +1,6 @@
 /*****************************
- * Author : <%= username %>
- * Created on : <%= date %>
+ * Author : fazilbinzaid
+ * Created on : 10-12-2017
  *****************************/
 
 import React from 'react';
@@ -19,7 +19,7 @@ import actions from './actions';
 import selectors from './selectors';
 
 
-class <%= name %> extends React.Component {
+class SignUp extends React.Component {
   constructor() {
     super();
 
@@ -39,7 +39,7 @@ class <%= name %> extends React.Component {
   }
 }
 
-<%= name %>.propTypes = {
+SignUp.propTypes = {
 
 }
 
@@ -55,12 +55,12 @@ const mapDispatchToProps = dispatch => {
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-const withReducer = injectReducer({ key: '<%= camelCaseName %>', reducer });
-const withSaga = injectSaga({ key: '<%= camelCaseName %>', saga })
+const withReducer = injectReducer({ key: 'signUp', reducer });
+const withSaga = injectSaga({ key: 'signUp', saga })
 
 
 export default compose(
   withReducer,
   withSaga,
   withConnect
-)(<%= name %>);
+)(SignUp);

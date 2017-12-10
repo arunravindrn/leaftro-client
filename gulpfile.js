@@ -11,7 +11,8 @@ const rootDir = 'src';
 
 const constants = {
 	templates: {
-		containers: path.join(__dirname, 'internals', 'templates/containers/**/*.**')
+		containers: path.join(__dirname, 'internals', 'templates/containers/**/*.**'),
+		components: path.join(__dirname, 'internals', 'templates/components/**/*.**')
 	},
 	output: rootDir,
 	destination: ''
@@ -29,7 +30,7 @@ const generator = () => {
 		}, {
 			type: 'input',
 			name: 'name',
-			message: 'Enter the name of the module (Use CamelCase eg: "LogOut") :-'
+			message: 'Enter the name of the module (Use CamelCase, eg: "LogOut") :-'
 		}
 	];
 
