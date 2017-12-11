@@ -7,10 +7,6 @@ import {
   CHECK_IS_AUTHENTICATED,
   AUTHENTICATED
 } from './constants';
-// import {
-//   CHECK_IS_AUTHENTICATED,
-//   AUTHENTICATED
-// } from 'containers/App/constants';
 import history from 'browserHistory';
 
 

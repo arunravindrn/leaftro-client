@@ -13,6 +13,7 @@ import Header from 'components/common/Header';
 import LeftDrawer from 'components/common/LeftDrawer';
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
+import browserHistory from 'browserHistory';
 
 import Login from 'containers/Login';
 import Accounts from 'containers/Accounts';
@@ -35,7 +36,10 @@ class App extends React.Component {
   }
 
   componentWillMount() {
-    if (!this.props.isAuthenticated) this.props.authValidate();
+    if (!this.props.isAuthenticated) {
+      console.log({browserHistory});
+      this.props.authValidate();
+    }
   }
 
   componentWillReceiveProps(nextProps) {

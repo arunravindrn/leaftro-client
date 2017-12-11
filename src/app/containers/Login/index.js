@@ -10,7 +10,8 @@ import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import MDSpinner from 'react-md-spinner';
 import TextField from 'material-ui/TextField';
-import FlatButton from 'material-ui/FlatButton'
+import FlatButton from 'material-ui/FlatButton';
+import PasswordField from 'material-ui-password-field';
 
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
@@ -58,7 +59,7 @@ class Login extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.isSuccess) {
-      browserHistory.push('/');
+      browserHistory.push('/dashboard');
       this.props.onLogin();
     }
   }
@@ -89,8 +90,8 @@ class Login extends React.Component {
         <div className="form" >
           <form>
             <TextField floatingLabelText="Email" name="email" value={this.state.email} onChange={this.handleChangeData.bind(this)} />
-            <TextField floatingLabelText="Password" name="password" value={this.state.password} onChange={this.handleChangeData.bind(this)} />
-            <FlatButton label={loadingSpinner("login")} onClick={this.handleSubmit.bind(this)} disabled={!(this.state.email && this.state.password)} style={styles.button} type='password' />
+            <PasswordField floatingLabelText="Password" name="password" type="password" value={this.state.password} onChange={this.handleChangeData.bind(this)} />
+            <FlatButton label={loadingSpinner("login")} onClick={this.handleSubmit.bind(this)} disabled={!(this.state.email && this.state.password)} style={styles.button} />
             <p className="message">Not registered? <a href="#" >Create an account</a></p>
           </form>
         </div>

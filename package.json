@@ -52,6 +52,7 @@
     "lodash": "^4.17.4",
     "material-ui": "^0.19.4",
     "material-ui-icons": "^1.0.0-beta.17",
+    "material-ui-password-field": "^1.4.1",
     "moment": "^2.19.3",
     "mui-theme": "^0.1.4",
     "mui-theme-default": "^0.1.7",
