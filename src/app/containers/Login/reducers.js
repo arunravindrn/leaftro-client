@@ -2,13 +2,15 @@ import { fromJS } from 'immutable';
 
 import {
   LOGIN_REQUEST,
-  LOGIN_SUCCESS,
   LOGIN_FAILURE,
-} from './constants';
-import {
+  NO_CHANGE,
   CHECK_IS_AUTHENTICATED,
   AUTHENTICATED
-} from 'containers/App/constants';
+} from './constants';
+// import {
+//   CHECK_IS_AUTHENTICATED,
+//   AUTHENTICATED
+// } from 'containers/App/constants';
 import history from 'browserHistory';
 
 
@@ -21,22 +23,30 @@ const initialState = fromJS({
 });
 
 export default function loginReducer(state = initialState, action) {
+  console.log({action}, 'login')
   switch (action.type) {
 
     case LOGIN_REQUEST:
-      // console.log("in reducer login request state and action", state, action)
       return state.set('isRequesting', true);
-
-    case LOGIN_SUCCESS:
-      // console.log("in reducer login success state and action", state, action)
-      return state
-        .set('isRequesting', false)
-        .set('isSuccess', true)
 
     case LOGIN_FAILURE:
       return state
         .set('isRequesting', false)
         .set('isError', true)
+
+    case CHECK_IS_AUTHENTICATED:
+      return state
+        .set('isChecking', true)
+
+    case AUTHENTICATED:
+      return state
+        .set('isChecking', false)
+        .set('isRequesting', false)
+        .set('isSuccess', true)
+
+    case NO_CHANGE:
+      return state
+        .set('isChecking', false)
 
     default:
       return state;

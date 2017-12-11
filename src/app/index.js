@@ -12,8 +12,6 @@ import '!!style-loader!css-loader!bootstrap/dist/css/bootstrap.min.css';
 import '!!style-loader!css-loader!assets/css/stylesheets.css';
 
 import App from 'containers/App';
-import Login from 'containers/Login';
-import Accounts from 'containers/Accounts';
 import configureStore from './configureStore';
 import history from 'browserHistory';
 
@@ -27,7 +25,6 @@ render(
     <Provider store={store} >
       <Router history={history} >
         <Switch>
-          <Route exact path="/login" component={Login} />
           <Route path="/" component={App} />
         </Switch>
       </Router>

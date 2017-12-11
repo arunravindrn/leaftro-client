@@ -33,10 +33,8 @@ function checkStatus(response) {
 
 function checkSuccess(response) {
   if (!response.hasOwnProperty('success') || response.success) {
-    // console.log("if inside");
     return response;
   }
-  // console.log("PushNotificationIOS.getMessage()", response)
 
   const error = new Error(response.msg);
   // error.response = response;

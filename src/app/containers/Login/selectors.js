@@ -13,9 +13,15 @@ const makeSelectSuccess = () => createSelector(
   substate => substate.get('isSuccess')
 );
 
+const makeSelectIsChecking = () => createSelector(
+  selectLogin,
+  substate => substate.get('isChecking')
+)
+
 
 export {
   selectLogin,
   makeSelectRequesting,
   makeSelectSuccess,
+  makeSelectIsChecking
 };

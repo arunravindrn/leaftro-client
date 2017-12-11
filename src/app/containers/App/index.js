@@ -14,11 +14,12 @@ import LeftDrawer from 'components/common/LeftDrawer';
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 
+import Login from 'containers/Login';
 import Accounts from 'containers/Accounts';
 import { makeSelectUser, makeSelectIsChecking, makeSelectIsAuthenticated } from './selectors';
 import saga from './sagas';
 import reducer from './reducers';
-import { checkIsAuthenticated } from './actions';
+import { authValidate, authenticated } from './actions';
 
 
 class App extends React.Component {
@@ -34,7 +35,7 @@ class App extends React.Component {
   }
 
   componentWillMount() {
-    this.props.checkIsAuthenticated();
+    if (!this.props.isAuthenticated) this.props.authValidate();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -67,6 +68,74 @@ class App extends React.Component {
       },
     };
 
+    const showHeader = () => {
+      if (this.props.isAuthenticated) {
+        return (
+          <div>
+            <Header
+              styles={styles.header}
+              handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer.bind(this)}
+            />
+
+            <LeftDrawer navDrawerOpen={navDrawerOpen}
+              menus={NavBarRouteData.menus}
+              username="User Admin"
+            />
+          </div>
+        );
+      }
+    }
+
+    return (
+
+      <div>
+        {showHeader()}
+        <div style={styles.container}>
+          <Switch>
+            <Route exact path="/login"
+              render={ () => <Login onLogin={this.props.authenticated} /> }
+            />
+            <Route path="/accounts" component={Accounts} />
+          </Switch>
+        </div>
+      </div>
+
+    );
+  }
+}
+
+App.propTypes = {
+};
+
+const mapStateToProps = createStructuredSelector({
+  userData: makeSelectUser(),
+  isChecking: makeSelectIsChecking(),
+  isAuthenticated: makeSelectIsAuthenticated()
+});
+
+const mapDispatchToProps = dispatch => {
+  return {
+    authValidate: () => dispatch(authValidate()),
+    authenticated: () => dispatch(authenticated()),
+    dispatch
+  };
+};
+
+
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
+
+const withReducer = injectReducer({ key: 'app', reducer });
+const withSaga = injectSaga({ key: 'app', saga });
+
+export default compose(
+  withReducer,
+  withSaga,
+  withConnect,
+)(App);
+
+
+
+
     // return (
     //   <MuiThemeProvider muiTheme={ThemeDefault}>
     //     <div>
@@ -86,51 +155,4 @@ class App extends React.Component {
     //   </MuiThemeProvider>
     // );
 
-    return (
-
-      <div>
-        <Header styles={styles.header}
-                handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer.bind(this)}/>
-
-          <LeftDrawer navDrawerOpen={navDrawerOpen}
-                      menus={NavBarRouteData.menus}
-                      username="User Admin"/>
-
-          <div style={styles.container}>
-            <Switch>
-              <Route path="/accounts" component={Accounts} />
-            </Switch>
-          </div>
-      </div>
-
-    );
-  }
-}
-
-App.propTypes = {
-};
-
-const mapStateToProps = createStructuredSelector({
-  userData: makeSelectUser(),
-  isChecking: makeSelectIsChecking(),
-  isAuthenticated: makeSelectIsAuthenticated()
-});
-
-const mapDispatchToProps = dispatch => {
-  return {
-    checkIsAuthenticated: () => dispatch(checkIsAuthenticated()),
-    dispatch
-  };
-};
-
-
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
-
-const withReducer = injectReducer({ key: 'app', reducer });
-const withSaga = injectSaga({ key: 'app', saga });
-
-export default compose(
-  withReducer,
-  withSaga,
-  withConnect,
-)(App);
+    // <Route exact path="/login" component={Login} />

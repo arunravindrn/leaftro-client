@@ -1,27 +1,26 @@
-import { CHECK_IS_AUTHENTICATED, REDIRECT_LOGIN, AUTHENTICATED } from './constants';
-import history from 'browserHistory';
+import { AUTH_VALIDATE, REDIRECT_LOGIN, AUTHENTICATED } from './constants';
+import browserHistory from 'browserHistory';
 
 
-export function checkIsAuthenticated() {
+export function authValidate() {
   return {
-    type: CHECK_IS_AUTHENTICATED
+    type: AUTH_VALIDATE
   };
 }
 
 export function redirectLogin() {
 
-  if (!(history.action === "PUSH")) history.push('/login');
+  browserHistory.push('/login')
 
   return {
     type: REDIRECT_LOGIN,
   };
 }
 
-export function authenticated() {
-
-  history.push('/')
+export function authenticated(payload) {
 
   return {
-    type: AUTHENTICATED
+    type: AUTHENTICATED,
+    payload
   }
 }

@@ -14,18 +14,17 @@ import FlatButton from 'material-ui/FlatButton'
 
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
+import browserHistory from 'browserHistory';
 
 import styles from './styles';
 import saga from './sagas';
 import reducer from './reducers';
-import { requestLogin } from './actions';
+import { requestLogin, checkIsAuthenticated } from './actions';
 import {
   makeSelectRequesting,
-  makeSelectSuccess
+  makeSelectSuccess,
+  makeSelectIsChecking
 } from './selectors';
-
-import { checkIsAuthenticated } from 'containers/App/actions';
-import { makeSelectIsAuthenticated } from 'containers/App/selectors';
 
 
 class Login extends React.Component {
@@ -33,8 +32,8 @@ class Login extends React.Component {
     super();
 
     this.state = {
-      email: '',
-      password: ''
+      email: 'admin@app.com',
+      password: 'admin1234'
     }
   }
 
@@ -57,9 +56,10 @@ class Login extends React.Component {
     this.props.dispatch(requestLogin(data));
   }
 
-  componentDidUpdate() {
-    if (this.props.isSuccess) {
-      this.props.history.push('/');
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.isSuccess) {
+      browserHistory.push('/');
+      this.props.onLogin();
     }
   }
 
@@ -73,13 +73,24 @@ class Login extends React.Component {
       }
     }
 
+    const redirecting = () => {
+      if (this.props.isChecking) {
+        return (
+          <p className='text-center'>Loading..</p>
+        );
+      } else {
+        return <p></p>;
+      }
+    }
+
     return (
       <div className="login-page">
+        {redirecting()}
         <div className="form" >
           <form>
             <TextField floatingLabelText="Email" name="email" value={this.state.email} onChange={this.handleChangeData.bind(this)} />
             <TextField floatingLabelText="Password" name="password" value={this.state.password} onChange={this.handleChangeData.bind(this)} />
-            <FlatButton label={loadingSpinner("login")} onClick={this.handleSubmit.bind(this)} disabled={!(this.state.email && this.state.password)} style={styles.button} />
+            <FlatButton label={loadingSpinner("login")} onClick={this.handleSubmit.bind(this)} disabled={!(this.state.email && this.state.password)} style={styles.button} type='password' />
             <p className="message">Not registered? <a href="#" >Create an account</a></p>
           </form>
         </div>
@@ -90,13 +101,13 @@ class Login extends React.Component {
 }
 
 Login.propTypes = {
-
+  onLogin: PropTypes.func.isRequired
 }
 
 const mapStateToProps = createStructuredSelector({
   isRequesting: makeSelectRequesting(),
   isSuccess: makeSelectSuccess(),
-  isAuthenticated: makeSelectIsAuthenticated()
+  isChecking: makeSelectIsChecking()
 })
 
 const mapDispatchToProps = (dispatch) => {

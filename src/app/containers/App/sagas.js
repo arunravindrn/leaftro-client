@@ -1,7 +1,7 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 
 import {
-  CHECK_IS_AUTHENTICATED,
+  AUTH_VALIDATE,
   AUTHENTICATED,
   AUTHENTICATION_FAILURE,
   REDIRECT_LOGIN
@@ -17,11 +17,12 @@ export function* authFlow(action) {
     yield put(authenticated());
   }
   catch(error) {
+    console.log({error})
     yield put(redirectLogin());
   }
 
 }
 
 export default function* authWatcher() {
-  yield takeLatest(CHECK_IS_AUTHENTICATED, authFlow)
+  yield takeLatest(AUTH_VALIDATE, authFlow)
 }
